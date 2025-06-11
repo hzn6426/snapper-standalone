@@ -1,0 +1,155 @@
+server:
+  port: ${server.port}
+  context-path: ${server.contextPath}
+  error:
+    whitelabel:
+      enabled: false
+  shutdown: graceful
+  undertow:
+    buffer-size: 2048
+    direct-buffers: true
+    threads:
+      io: 8
+      worker: 120
+spring:
+  security:
+    filter:
+      order: 10
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+  mvc:
+    enabled: true
+    throw-exception-if-no-handler-found: true
+  profiles:
+    active: ${server.env}
+  application:
+    name: ${server.application}
+    lifecycle:
+      timeout-per-shutdown-phase: 10s
+  sleuth:
+    enabled: true
+    sampler:
+      probability: 1.0
+  cloud:
+    config:
+      import-check:
+        enabled: false
+    gateway:
+       discovery:
+         locator:
+           lower-case-service-id: true
+           enabled: true
+  redis:
+    username: ${redis.username}
+    host: ${redis.host}
+    port: ${redis.port}
+    password: ${redis.password}
+    timeout: 18000
+    lettuce:
+      pool:
+        min-idle: 5
+        max-idle: 50
+        max-active: 100
+        max-wait: 1000
+  datasource:
+#    username: root
+#    password: test
+    druid:
+      enable: true
+      username: ${jdbc.username}
+      password: ${jdbc.password}
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: ${jdbc.url}
+      db-type: mysql
+      initialSize: 30
+      minIdle: 60
+      maxActive: 100
+      max-wait: 300000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 10
+      validation-query: SELECT 'x'
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      time-between-eviction-runs-millis: 600000
+      min-evictable-idle-time-millis: 600000
+      max-evictable-idle-time-millis: 900000
+      filters: stat,wall,slf4j
+      filter:
+        slf4j:
+          statement-create-after-log-enabled: false
+          statement-log-enabled: false
+          statement-executable-sql-log-enable: false
+          statement-log-error-enabled: false
+          result-set-log-enabled: false
+          statement-sql-pretty-format: false
+        wall:
+          enabled: true
+          config:
+            commentAllow: true
+            multiStatementAllow: true
+            noneBaseStatementAllow: true
+      web-stat-filter:
+        enabled: false
+        url-pattern: /*
+        exclusions: "*.js , *.gif ,*.jpg ,*.png ,*.css ,*.ico , /druid/*"
+        session-stat-max-count: 1000
+        profile-enable: true
+        session-stat-enable: false
+      stat-view-servlet:  #展示Druid的统计信息,StatViewServlet的用途包括：1.提供监控信息展示的html页面2.提供监控信息的JSON API
+        enabled: false
+        url-pattern: /druid/*   #根据配置中的url-pattern来访问内置监控页面，如果是上面的配置，内置监控页面的首页是/druid/index.html例如：http://127.0.0.1:9000/druid/index.html
+        reset-enable: true    #允许清空统计数据
+        login-username: ${durid.login-username}
+        login-password: ${durid.login-password}
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+  web:
+    resources:
+      add-mappings: false
+jasypt:
+  encryptor:
+    bean: customerStringEncryptor
+    property:
+      prefix: "BENC("
+      suffix: ")"
+logging:
+  level:
+    console: ${snapper.log.level}
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+mybatis-plus:
+  mapper-locations:
+    - classpath:com/baomibing/authority/mapper/xml/*Mapper.xml
+    - classpath:com/baomibing/business/mapper/xml/*Mapper.xml
+    - classpath:com/baomibing/flow/mapper/xml/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.baomibing.authority.entity;com.baomibing.business.entity;com.baomibing.flow.entity;
+  global-config:
+    enable-sql-runner: true
+    db-config:
+      id-type: ASSIGN_ID
+      insert-strategy: NOT_NULL
+      update-strategy: NOT_NULL
+  configuration:
+    log-impl: ${snapper.log.impl}
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+    #配置JdbcTypeForNull, oracle数据库必须配置
+    jdbc-type-for-null: 'null'
+snapper:
+  cache:
+    prefix: ${snapper.cache.prefix}
+    mode: ${snapper.cache.mode}
+  ulog: false
+  schema: ${jdbc.schema}
+  wrap:
+    package: ${snapper.wrap.package}
+  action:
+    package: ${snapper.action.package}
