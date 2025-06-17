@@ -56,6 +56,8 @@ dev: {
 <li>打开项目目录下com.baomibing.SnapperServerBootstrap.java文件，执行main方法即可(右键debug...)</li>
 </ol>
 
+<b>注意：项目请使用 maven <code>3.6.x</code>版本构建！</b>
+
 <h2>使用方式(文档建设中)：</h2>
 只需要在service实现类中配置以下两个注解（详细配置请参考文档），剩下的交给Snapper
 
