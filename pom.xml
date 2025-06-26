@@ -32,7 +32,7 @@
     <java.version>1.8</java.version>
 
     <lombok.version>1.18.26</lombok.version>
-    <snapper-dependence.version>3.2.4</snapper-dependence.version>
+    <snapper-dependence.version>3.2.6</snapper-dependence.version>
     <spring.boot.version>2.6.14</spring.boot.version>
     <spring.cloud.version>2021.0.4</spring.cloud.version>
   </properties>
