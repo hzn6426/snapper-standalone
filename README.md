@@ -12,7 +12,9 @@
 <p><b>附加协议：必须遵守国家法律法规，不允许非法项目使用，使用方在项目介绍中显著位置必须标注版权信息（链接仓库地址），不允许删除源码注释申明，不允许山寨换皮商用与官方企业版竞争，否则视为侵权。</b></p>
 
 <hr/>
-<h2>核心功能(V3.2.4)：</h2>
+<p><b><a href="https://admin.baomibing.com/user/login">演示环境</a>账号密码(ximen/123456)</b></p>
+
+<h2>核心功能：</h2>
 <ul>
     <li>用户管理 管理系统用户，激活、启用、停用、重置密码、设置标签等功能</li>
     <li>角色管理 管理系统的资源权限，分配用户，资源授权等功能</li>
@@ -20,6 +22,8 @@
     <li>组织架构 管理系统组织架构，分配人员，职位，角色等功能</li>
     <li>职位管理 管理组织中的职位，分配职位对应的角色和数据权限等功能</li>
     <li>授权管理 从用户和用户组维度，对功能进行功能数据权限、业务数据权限、列数据权限的分配</li>
+    <li>权限动作 动态修改@Action动作内容，实时修改数据权限配置</li>
+    <li>权限规则 规则编辑器，动态修改数据权限规则，实时生效</li>
     <li>菜单管理 管理系统中的菜单资源和按钮资源，对每个功能进行业务动作关联</li>
     <li>数据列 管理业务表中数据列，业务数据权限分配时按照指定列分配</li>
     <li>字典管理 管理系统中字典数据，比如用户业务标记，用来与数据权限关联</li>
@@ -51,7 +55,7 @@ dev: {
 
 <h2>启动项目</h2>
 <ol>
-<li>初始化数据库：创建MySQL数据库snapper,导入snapper-3.2.4.sql</li>
+<li>初始化数据库：创建MySQL数据库snapper,导入snapper-3.2.8.sql</li>
 <li>打开src/main/envs/env-dev.properties配置数据库信息及Redis信息，密码可以通过test下的EncryptUtil进行加密</li>
 <li>打开项目目录下com.baomibing.SnapperServerBootstrap.java文件，执行main方法即可(右键debug...)</li>
 </ol>
@@ -74,12 +78,13 @@ dev: {
     <li><a href="https://gitee.com/ifrog/snapper-standalone">snapper-standalone，单机版项目，基于Spring-boot，是权限功能的后台服务端，为集成权限的后台示例</a></li>
     <li><a href="https://gitee.com/ifrog/snapper-dependence">snapper-dependence，单机版项目运行依赖包，可本地安装</a></li>
     <li><a href="https://gitee.com/ifrog/snam">snam 基于React、Antd，是权限功能的UI端，开箱即用(NEWUI分支)</a></li>
+    <li><a href="https://gitee.com/ifrog/snapper-flow">snapper-flow</a> 工作流引擎</li>
+    <li><a href="https://rule.baomibing.com/">规则引擎，基于Groovy，实时修改权限规则（账号同演示账号)</a></li>
 </ul>
 <h2>相关链接</h2>
 <ul>
     <li><a href="https://baomibing.com">官网</a></li>
     <li><a href="https://baomibing.com/pages/the-quick-start/">项目使用介绍</a></li>
-    <li><a href="https://admin.baomibing.com/user/login">演示环境</a></li>
     <li><a href="https://gitee.com/ifrog/snapper-boot">微服务版</a></li>
 </ul>
 <hr/>
