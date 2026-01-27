@@ -1,7 +1,6 @@
 package com.baomibing.business.service.impl;
 
 import com.baomibing.authority.dto.GroupDto;
-import com.baomibing.authority.dto.UserGroupDto;
 import com.baomibing.authority.service.SysGroupService;
 import com.baomibing.authority.service.SysUserGroupService;
 import com.baomibing.business.constant.UserTag;
@@ -11,6 +10,8 @@ import com.baomibing.business.mapper.WmsOrderMapper;
 import com.baomibing.business.service.WmsOrderService;
 import com.baomibing.core.annotation.Action;
 import com.baomibing.core.annotation.ActionConnect;
+import com.baomibing.core.annotation.TenantAction;
+import com.baomibing.core.annotation.TenantActionConnect;
 import com.baomibing.core.common.SearchResult;
 import com.baomibing.orm.base.MBaseServiceImpl;
 import com.baomibing.tool.constant.Formats;
@@ -18,7 +19,7 @@ import com.baomibing.tool.constant.Strings;
 import com.baomibing.tool.util.CharacterUtil;
 import com.baomibing.tool.util.Checker;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.google.common.collect.Sets;
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,7 @@ import java.util.stream.Collectors;
  * @version 1.0.0
  **/
 @Service
+@Slf4j
 public class WmsOrderServiceImpl extends MBaseServiceImpl<WmsOrderMapper, WmsOrder, WmsOrderDto> implements WmsOrderService {
 
     @Autowired private SysGroupService groupApi;
@@ -45,6 +47,9 @@ public class WmsOrderServiceImpl extends MBaseServiceImpl<WmsOrderMapper, WmsOrd
     @ActionConnect(value = {"selectList","selectCount"},
             userAuthColumn= {UserTag.SERVICE + Strings.HASH + "service_code", UserTag.SALLER + Strings.HASH + "seller_code"},
             groupAuthColumn = {UserTag.SERVICE + Strings.HASH + "service_code", UserTag.SALLER + Strings.HASH + "seller_code"})
+
+    @TenantAction(value = "ORDER_SEARCH")
+    @TenantActionConnect(value = {"selectList","selectCount"}, userAuthColumn = "buyer_user", groupAuthColumn = "buyer_group", tenantAuthColumn ="buyer_tenant")
     @Override
     public SearchResult<WmsOrderDto> search(WmsOrderDto v, int pageNo, int pageSize) {
         LambdaQueryWrapper<WmsOrder> wrapper = lambdaQuery();
@@ -52,6 +57,7 @@ public class WmsOrderServiceImpl extends MBaseServiceImpl<WmsOrderMapper, WmsOrd
                 .ge(Checker.beNotNull(v.getStart()), WmsOrder::getCreateTime, v.getStart())
                 .le(Checker.beNotNull(v.getEnd()), WmsOrder::getCreateTime, v.getEnd())
                 .eq(Checker.beNotEmpty(v.getSellerCode()), WmsOrder::getSellerCode, v.getServiceCode());
+
         SearchResult<WmsOrderDto> result = search(wrapper, pageNo, pageSize);
         List<GroupDto> companys = groupApi.listBranchCompanines();
         Map<String, String> groupmap = companys.stream().collect(Collectors.toMap(GroupDto::getId, GroupDto::getGroupName));

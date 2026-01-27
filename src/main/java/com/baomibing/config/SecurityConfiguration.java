@@ -2,9 +2,11 @@ package com.baomibing.config;
 
 import com.baomibing.authority.runner.AuthorizationCacheWarmUpRunner;
 import com.baomibing.authority.service.SystemService;
+import com.baomibing.authority.service.SystemTenantService;
 import com.baomibing.security.exception.AuthorityWebExceptionHandler;
 import com.baomibing.security.filter.*;
 import com.baomibing.security.service.SystemServiceImpl;
+import com.baomibing.security.service.SystemTenantServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -95,6 +97,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
+    public CommonHmacAuthenticationFilter commonHmacAuthenticationFilter() {
+        return new CommonHmacAuthenticationFilter();
+    }
+
+    @Bean
+    public CommonHmacAuthorizationFilter commonHmacAuthorizationFilter() {
+        return new CommonHmacAuthorizationFilter();
+    }
+
+    @Bean
     public CommonBlackFilter commonBlackFilter() {
         return new CommonBlackFilter();
     }
@@ -153,6 +165,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new SystemServiceImpl();
     }
 
-
+    @Bean
+    public SystemTenantService sysTenantService() {
+        return new SystemTenantServiceImpl();
+    }
 }
 

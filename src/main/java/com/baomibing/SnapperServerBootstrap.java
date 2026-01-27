@@ -19,8 +19,8 @@ import java.net.UnknownHostException;
 @EnableDiscoveryClient
 @EnableEncryptableProperties
 @EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
-@MapperScan({"com.baomibing.authority.mapper","com.baomibing.business.mapper","com.baomibing.flow.mapper"})
-@ComponentScan({ "com.baomibing.core.**", "com.baomibing.web.config","com.baomibing.authority.**","com.baomibing.config","com.baomibing.business.**","com.baomibing.flow.**"})
+@MapperScan({"com.baomibing.authority.mapper","com.baomibing.business.mapper"})
+@ComponentScan({ "com.baomibing.core.**", "com.baomibing.web.config","com.baomibing.authority.**","com.baomibing.config","com.baomibing.business.**"})
 @Slf4j
 public class SnapperServerBootstrap {
 	public static void main(String[] args) throws UnknownHostException {

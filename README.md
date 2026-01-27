@@ -4,7 +4,7 @@
 <hr/>
 <h2>概要</h2>
 <p>不依赖于业务，方便集成，开箱即用，注解式配置 + 运行时增强 + 界面化配置多种方式，用户 + 用户组 + 职位多种维度，授权码 + 时间段 + 委托 多种模式解决复杂权限难题
-<p>本项目已将权限功能封装为单独的系统，拥有独立界面，与业务系统隔离，只通过界面配置即可实现资源权限、业务数据权限、功能数据权限、列数据权限的功能</p>
+<p>本项目已将权限功能封装为单独的系统，拥有独立界面，与业务系统隔离，只通过界面配置即可实现资源权限、业务数据权限、功能数据权限、列数据权限的功能,解决<b>99%</b>  的数据权限问题</p>
 
 
 <p><b>本项目为双协议授权 默认采用 Apache-2.0 协议开源 完全开放 遵守附加协议 的前提下允许任何目的商用。 如果违反 附加协议 自动升级为 AGPL-3.0 协议。</b></p>
@@ -55,8 +55,8 @@ dev: {
 
 <h2>启动项目</h2>
 <ol>
-<li>初始化数据库：创建MySQL数据库snapper,导入snapper-3.2.8.sql</li>
-<li>打开src/main/envs/env-dev.properties配置数据库信息及Redis信息，密码可以通过test下的EncryptUtil进行加密</li>
+<li>初始化数据库：创建MySQL数据库snapper,导入snapper-3.3.0.sql</li>
+<li>打开src/main/envs/env-local.properties配置数据库信息及Redis信息，密码可以通过test下的EncryptUtil进行加密</li>
 <li>打开项目目录下com.baomibing.SnapperServerBootstrap.java文件，执行main方法即可(右键debug...)</li>
 </ol>
 
@@ -77,7 +77,7 @@ dev: {
 <ul>
     <li><a href="https://gitee.com/ifrog/snapper-standalone">snapper-standalone，单机版项目，基于Spring-boot，是权限功能的后台服务端，为集成权限的后台示例</a></li>
     <li><a href="https://gitee.com/ifrog/snapper-dependence">snapper-dependence，单机版项目运行依赖包，可本地安装</a></li>
-    <li><a href="https://gitee.com/ifrog/snam">snam 基于React、Antd，是权限功能的UI端，开箱即用(NEWUI分支)</a></li>
+    <li><a href="https://gitee.com/ifrog/snam">snam 基于React、Antd，是权限功能的UI端，开箱即用(develop或 master分支)</a></li>
     <li><a href="https://gitee.com/ifrog/snapper-flow">snapper-flow</a> 工作流引擎</li>
     <li><a href="https://rule.baomibing.com/">规则引擎，基于Groovy，实时修改权限规则（账号同演示账号)</a></li>
 </ul>
@@ -102,10 +102,8 @@ dev: {
 
 ![changelog.png](images/changelog.png)
 ![user.png](images/user.png)
-![uset.png](images/uset.png)
 ![group.png](images/group.png)
 ![resource.png](images/resource.png)
 ![dict.png](images/dict.png)
 ![menu.png](images/menu.png)
-![column.png](images/column.png)
 ![tenant.png](images/tenant.png)

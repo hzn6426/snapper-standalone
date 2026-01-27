@@ -54,5 +54,11 @@ public class WmsOrder extends MBaseModel {
 
     private String unit;
 
+    private String buyerTenant;
+
+    private String buyerUser;
+
+    private String buyerGroup;
+
 
 }

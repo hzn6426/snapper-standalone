@@ -57,4 +57,10 @@ public class WmsOrderDto {
     private Date start;
 
     private Date end;
+
+    private String buyerTenant;
+
+    private String buyerUser;
+
+    private String buyerGroup;
 }
